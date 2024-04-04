@@ -1,0 +1,23 @@
+Q3:Write a Java Program to count the number of words in a string using HashMap.
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+public class WordCount {
+
+    public static HashMap<String, Integer> countWords(String inputString) {
+        HashMap<String, Integer> wordCountMap = new HashMap<>();
+        Arrays.stream(inputString.split("\\s+")).forEach(word -> wordCountMap.put(word, wordCountMap.getOrDefault(word, 0) + 1));
+        return wordCountMap;
+    }
+
+    public static void main(String[] args) {
+        String inputString = "Hello world, this is a test. Hello world again!";
+        
+        HashMap<String, Integer> wordCountMap = countWords(inputString);
+
+        System.out.println("Word Counts:");
+        wordCountMap.forEach((word, count) -> System.out.println(word + ": " + count));
+    }
+}
+

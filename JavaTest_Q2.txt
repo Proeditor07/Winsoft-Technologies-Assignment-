@@ -1,0 +1,48 @@
+Q2:Find maximum sum path involving elements of given arrays
+
+public class MaximumSumPath {
+
+    public static int findMaxSumPath(int[] arrayA, int[] arrayB) {
+        int sizeA = arrayA.length;
+        int sizeB = arrayB.length;
+
+        int sumA = 0, sumB = 0, maxSum = 0;
+        int idxA = 0, idxB = 0;
+
+        while (idxA < sizeA && idxB < sizeB) {
+            if (arrayA[idxA] < arrayB[idxB]) {
+                sumA += arrayA[idxA++];
+            } else if (arrayA[idxA] > arrayB[idxB]) {
+                sumB += arrayB[idxB++];
+            } else {
+                maxSum += Math.max(sumA, sumB);
+                maxSum += arrayA[idxA];
+                sumA = 0;
+                sumB = 0;
+                idxA++;
+                idxB++;
+            }
+        }
+
+        while (idxA < sizeA) {
+            sumA += arrayA[idxA++];
+        }
+
+        while (idxB < sizeB) {
+            sumB += arrayB[idxB++];
+        }
+
+        maxSum += Math.max(sumA, sumB);
+
+        return maxSum;
+    }
+
+    public static void main(String[] args) {
+        int[] arrayA = {3, 6, 7, 8, 10, 12, 15, 18, 100};
+        int[] arrayB = {1, 2, 3, 5, 7, 9, 10, 11, 15, 16, 18, 25, 50};
+
+        int maxSum = findMaxSumPath(arrayA, arrayB);
+
+        System.out.println("The maximum sum path is: " + maxSum);
+    }
+}
